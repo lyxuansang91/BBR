@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="app_name">Streaming</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_activity_web_view">WebViewActivity</string>
+    <string name="title_activity_nhat_ky">NhatKyActivity</string>
+    <string name="title_activity_another">AnotherActivity</string>
+    <string name="title_activity_web_show">WebShowActivity</string>
+    <string name="title_activity_nhatky">NhatkyActivity</string>
+    <string name="title_activity_news">NewsActivity</string>
+    <string name="title_activity_shopping">ShoppingActivity</string>
+
+</resources>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/form"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/txtSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:ems="10"
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/btnAttach"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/pictures" />
+
+        <Button
+            android:id="@+id/btnVietNhatKy"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/notebook_girl" />
+
+        <EditText
+            android:id="@+id/txtInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/btnVietNhatKy"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/btnAttach"
+            android:layout_toLeftOf="@+id/btnVietNhatKy"
+            android:background="@drawable/back"
+            android:ems="10"
+            android:hint="Bạn đang nghĩ gì ..."
+            android:inputType="textMultiLine"
+            android:paddingLeft="10dp" >
+
+            <requestFocus />
+        </EditText>
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/form"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:ems="10"
+        android:hint="Mời bạn nhập tiêu đề ..." />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:divider="@null"
+        android:dividerHeight="0dp" >
+
+    </ListView>
+
+</RelativeLayout>
