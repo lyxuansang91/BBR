@@ -27,6 +27,7 @@ public class TintucChitietActivity extends Activity {
 
 	private void loadData(String url) {
 		webView.setWebViewClient(new WebViewClient());
+		
 		webView.loadUrl(url);
 	}
 

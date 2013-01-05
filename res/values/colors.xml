@@ -6,5 +6,8 @@
     <color name="highlight_top">#85ffc600</color>
     <color name="highlight_bottom">#85cf9600</color>
     <color name="toolbar_fg">#85ffffff</color>
+    <color name="tabMedium">#2B2B2B</color>
+    <color name="tabDark">#10ffffff</color>
+    <color name="tabTransparent">#10ffffff</color>
 
 </resources>

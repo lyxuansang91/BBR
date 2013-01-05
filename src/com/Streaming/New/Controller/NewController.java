@@ -26,6 +26,7 @@ public class NewController {
 	private int mItemCount = 0;
 
 	private Thread mThreadLoadData = null;
+	private int maxPage = 20;
 
 	private ArrayList<NewObject> news = new ArrayList<NewObject>();
 	private NewAdapter adapter;
@@ -97,7 +98,7 @@ public class NewController {
 			public void run() {
 				if (page == 0) {
 					page = page + 1;// load trang 1
-				} else {
+				} else if(page <= maxPage){
 					page = page + 1;// ++
 				}
 				news = NewModel.getNewsFromTheServer(Configuration.IPNEWS

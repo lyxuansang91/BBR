@@ -37,9 +37,10 @@ public class MusicActivity extends Activity {
 
 	@Override
 	protected void onDestroy() {
+		super.onDestroy();
 		toastController.handleMessage(ToastController.ON_DESTROY);
 		System.gc();
-		super.onDestroy();
+		
 	}
 
 	@Override
@@ -51,16 +52,18 @@ public class MusicActivity extends Activity {
 
 	@Override
 	protected void onResume() {
-		toastController.handleMessage(ToastController.ON_RESUME);
-		System.gc();
 		super.onResume();
+		toastController.handleMessage(ToastController.ON_RESUME);
+		
+		
 	}
 
 	@Override
 	protected void onStop() {
-		toastController.handleMessage(ToastController.ON_STOP);
-		System.gc();
 		super.onStop();
+		toastController.handleMessage(ToastController.ON_STOP);
+		
+		
 	}
 
 }

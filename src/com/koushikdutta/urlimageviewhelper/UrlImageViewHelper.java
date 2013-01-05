@@ -2,6 +2,7 @@ package com.koushikdutta.urlimageviewhelper;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,6 +29,7 @@ import android.graphics.drawable.Drawable;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.widget.ImageView;
 
 public final class UrlImageViewHelper {
@@ -59,37 +61,63 @@ public final class UrlImageViewHelper {
 	}
 
 	private static BitmapDrawable loadDrawableFromStream(Context context,
-			String filename, int maxSize) throws IOException {
-		FileInputStream stream = context.openFileInput(filename);
-		prepareResources(context);
+			String filename, int maxSize) throws FileNotFoundException {
+		FileInputStream stream;
+		try {
+			stream = context.openFileInput(filename);
+			prepareResources(context);
 
-		BitmapFactory.Options o = new BitmapFactory.Options();
-		o.inJustDecodeBounds = true;
-		BitmapFactory.decodeStream(stream, null, o);
+			BitmapFactory.Options o = new BitmapFactory.Options();
+			o.inJustDecodeBounds = true;
+			BitmapFactory.decodeStream(stream, null, o);
 
-		// Find the correct scale value. It should be the power of 2.
-		int tmpWidth = o.outWidth;
-		int tmpHeight = o.outHeight;
-		int scale = 1;
-		while (true) {
-			if (tmpWidth / 2 < maxSize || tmpHeight / 2 < maxSize)
-				break;
-			tmpWidth /= 2;
-			tmpHeight /= 2;
-			scale *= 2;
+			// Find the correct scale value. It should be the power of 2.
+			int tmpWidth = o.outWidth;
+			int tmpHeight = o.outHeight;
+			int scale = 1;
+			while (true) {
+				if (tmpWidth / 2 < maxSize || tmpHeight / 2 < maxSize)
+					break;
+				tmpWidth /= 2;
+				tmpHeight /= 2;
+				scale *= 2;
+			}
+			try {
+				stream.close();
+			} catch (IOException e) {
+				Log.e("Close exception ", "stream close");
+				e.printStackTrace();
+			}
+
+			// decode with inSampleSize
+			BitmapFactory.Options o2 = new BitmapFactory.Options();
+			o2.inSampleSize = scale;
+
+			stream = context.openFileInput(filename);
+			Bitmap bitmap = BitmapFactory.decodeStream(stream, null, o2);
+
+			try {
+				stream.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				Log.e("Close exception ", "2nd stream close");
+				e.printStackTrace();
+			}
+			Log.i("FUCK ", String.format("Loaded bitmap (%dx%d).",
+					bitmap.getWidth(), bitmap.getHeight()));
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return new BitmapDrawable(mResources, bitmap);
+		} catch (OutOfMemoryError er) {
+			Log.v("Out of memory ", "error");
+			er.printStackTrace();
 		}
-		stream.close();
-
-		// decode with inSampleSize
-		BitmapFactory.Options o2 = new BitmapFactory.Options();
-		o2.inSampleSize = scale;
-
-		stream = context.openFileInput(filename);
-		Bitmap bitmap = BitmapFactory.decodeStream(stream, null, o2);
-		stream.close();
-		// Log.i(LOGTAG, String.format("Loaded bitmap (%dx%d).",
-		// bitmap.getWidth(), bitmap.getHeight()));
-		return new BitmapDrawable(mResources, bitmap);
+		return null;
 	}
 
 	public static final int CACHE_DURATION_INFINITE = Integer.MAX_VALUE;
@@ -360,6 +388,7 @@ public final class UrlImageViewHelper {
 					copyStream(is, fos);
 					fos.close();
 					is.close();
+					Thread.sleep(1000);
 					return loadDrawableFromStream(context, filename, maxSize);
 				} catch (Exception ex) {
 					// Log.e(LOGTAG, "Exception during Image download of " +
