@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+@SuppressWarnings("deprecation")
 public class TabSample extends TabActivity {
 	/** Called when the activity is first created. */
 
@@ -22,9 +23,10 @@ public class TabSample extends TabActivity {
 		
 		addTab("", R.drawable.music_cd_3, MusicActivity.class);
 		addTab("", R.drawable.news2, NewsActivity.class);
-
 		addTab("", R.drawable.diary_128, NhatkyActivity.class);
-		addTab("", R.drawable.hp_fav_star, ShoppingActivity.class);
+		addTab("", R.drawable.hp_fav_star, UocNguyenActivity.class);
+		addTab("", R.drawable.shopping_bag, ShoppingActivity.class);
+		//addTab("", R.drawable.)
 	}
 
 	private void addTab(String labelId, int drawableId, Class<?> c) {

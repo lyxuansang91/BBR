@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">Streaming</string>
@@ -12,5 +13,8 @@
     <string name="title_activity_nhatky">NhatkyActivity</string>
     <string name="title_activity_news">NewsActivity</string>
     <string name="title_activity_shopping">ShoppingActivity</string>
+    <string name="title_activity_uoc_nguyen">UocNguyenActivity</string>
+    <string name="uocnguyen">Ước nguyện</string>
+    
 
 </resources>
